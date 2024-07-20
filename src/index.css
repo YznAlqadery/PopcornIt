@@ -1,13 +1,482 @@
+:root {
+  --color-black: #000000;
+  --color-navy: #14213d;
+  --color-gray: #e5e5e5;
+  --color-white: #ffffff;
+  --color-dark-yellow: #fca311;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue";
+  background-color: var(--color-gray);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.navbar {
+  padding: 1rem;
+  background-color: var(--color-navy);
+  color: var(--color-white);
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.search-input {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 5px;
+  border: none;
+  max-width: 500px;
+  color: var(--color-black);
+  font-size: 1rem;
+  font-family: inherit;
+}
+.movies {
+  margin-top: 1rem;
+  max-width: 1200px;
+  height: 80vh;
+  overflow-y: scroll;
+  margin: 10px auto;
+  padding: 1.2rem;
+  background-color: var(--color-navy);
+  border-radius: 1rem;
+}
+.movie {
+  display: flex;
+  margin: 1rem auto;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border-radius: 1rem;
+}
+.movie-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+.movie-details {
+  margin-left: 1rem;
+}
+.movie-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+.movie-year {
+  font-size: 1rem;
+  text-align: left;
+}
+span {
+  color: var(--color-dark-yellow);
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+.selected-movie {
+  margin: 2rem auto;
+  display: flex;
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  border-radius: 1rem;
+}
+.selected-movie-about {
+  padding-bottom: 1rem;
+}
+.selected-movie-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+
+  margin-top: 0.8rem;
+}
+.selected-movie-plot {
+  padding: 1rem;
+  text-align: left;
+  font-style: italic;
+}
+.add-to-list {
+  width: 70%;
+  padding: 1rem;
+  background-color: var(--color-dark-yellow);
+  color: var(--color-white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 2rem;
+  transition: background-color 0.3s;
+}
+.add-to-list:hover {
+  background-color: #fcbf49;
+}
+.add-to-list:disabled {
+  background-color: var(--color-gray);
+  cursor: not-allowed;
+  color: var(--color-black);
+}
+.back-btn {
+  writing-mode: vertical-rl;
+  text-orientation: upleft;
+  transform: rotate(180deg);
+  vertical-align: middle;
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--color-dark-yellow);
+  color: var(--color-white);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.1rem;
+
+  transition: background-color 0.3s;
+}
+.back-btn:hover {
+  background-color: #fcbf49;
+}
+
+.watched-movies {
+  margin-top: 1rem;
+  max-width: 1200px;
+  overflow-y: scroll;
+  margin: 10px auto;
+  padding: 1rem;
+  background-color: var(--color-dark-yellow);
+  border-radius: 1rem;
+  color: var(--color-black);
+}
+.watched-movies h2 {
+  margin: 0;
+  padding: 0;
+}
+.watched-movies-btn {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  border: none;
+  border-radius: 50%;
+  padding: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 2rem;
+  transition: background-color 0.8s;
+  text-align: center;
+  display: block;
+  margin-top: -2rem;
+}
+.watched-movies-btn span {
+  display: block;
+  font-size: 0.7rem;
+  text-align: center;
+  padding: 0rem;
+  margin: 0 auto;
+}
+
+.watched-movies-btn:hover {
+  background-color: #fcbf49;
+}
+
+.hidden {
+  display: none;
+}
+.watched-movie {
+  position: relative;
+  display: flex;
+  margin: 1rem auto;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border-radius: 1rem;
+}
+.watched-movie-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+.watched-movie-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+.watched-movie-details {
+  margin-left: 1rem;
+}
+.watched-movie-year {
+  font-size: 1rem;
+  text-align: left;
+}
+.remove-from-list {
+  position: absolute;
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+  top: 1rem;
+  right: 1rem;
+}
+.remove-from-list:hover {
+  background-color: #fcbf49;
+}
+
+/* Media Queries*/
+
+@media screen and (width <= 700px) {
+  .search-input {
+    max-width: 300px;
+  }
+}
+
+@media screen and (width <= 550px) {
+  .search-input {
+    max-width: 250px;
+    padding: 0.5rem;
+  }
+  .movie-title {
+    font-size: 1.2rem;
+  }
+  .movie-year {
+    font-size: 0.8rem;
+  }
+  .movie {
+    padding: 0.5rem;
+  }
+  .movie-img {
+    width: 75px;
+    height: 75px;
+  }
+  .movies {
+    height: 75vh;
+  }
+  .selected-movie {
+    margin: 1rem auto;
+  }
+  .watched-movies h2 {
+    font-size: 1.2rem;
+  }
+  .watched-movie-title {
+    font-size: 1rem;
+  }
+  .watched-movie-year {
+    font-size: 0.8rem;
+  }
+  .watched-movie {
+    padding: 0.5rem;
+  }
+
+  .watched-movie {
+    padding: 0.5rem;
+  }
+  .watched-movie-img {
+    width: 75px;
+    height: 75px;
+  }
+  .remove-from-list {
+    padding: 0.5rem;
+    font-size: 1rem;
+    top: 0.5rem;
+  }
+  .selected-movie-title {
+    font-size: 1.2rem;
+  }
+  .selected-movie-plot {
+    font-size: 0.9rem;
+  }
+  .selected-movie-director {
+    font-size: 0.8rem;
+  }
+  .selected-movie-actors {
+    font-size: 0.5rem;
+  }
+  .selected-movie-awards {
+    font-size: 0.8rem;
+  }
+  .add-to-list {
+    padding: 0.3rem;
+    font-size: 0.8rem;
+  }
+  .back-btn {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .watched-movies-btn {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (width <=500px) {
+  .search-input {
+    max-width: 200px;
+    padding: 0.5rem;
+  }
+  .movie-title {
+    font-size: 0.9rem;
+  }
+  .movie-year,
+  .watched-movie-year {
+    font-size: 0.7rem;
+  }
+  .movie,
+  .watched-movie {
+    padding: 0.5rem;
+  }
+  .movie-img {
+    width: 50px;
+    height: 50px;
+  }
+  .movies {
+    height: 70vh;
+  }
+  .selected-movie {
+    flex-direction: column;
+  }
+  .selected-movie img {
+    width: 100%;
+    height: 470px;
+  }
+  .watched-movies h2 {
+    font-size: 1rem;
+  }
+  .watched-movie-img {
+    width: 50px;
+    height: 50px;
+  }
+  .remove-from-list {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    top: 0.5rem;
+  }
+  .selected-movie-title {
+    font-size: 1rem;
+  }
+  .selected-movie-plot {
+    font-size: 0.7rem;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .selected-movie-about {
+    padding-bottom: 0;
+  }
+  .selected-movie-director,
+  .selected-movie-actors,
+  .selected-movie-awards,
+  .watched-movie-title {
+    font-size: 0.8rem;
+  }
+  .add-to-list {
+    padding: 0.6rem;
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+  }
+  .watched-movies-btn {
+    padding: 0.8rem;
+    font-size: 0.8rem;
+  }
+  .back-btn {
+    writing-mode: horizontal-tb;
+    transform: rotate(0deg);
+    vertical-align: middle;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+@media screen and (width <= 400px) {
+  .search-input {
+    max-width: 150px;
+    padding: 0.4rem;
+  }
+  .movie-year,
+  .watched-movie-year {
+    font-size: 0.6rem;
+  }
+  .movie,
+  .watched-movie {
+    padding: 0.5rem;
+  }
+  .movie-img {
+    width: 50px;
+    height: 50px;
+  }
+  .movies {
+    height: 60vh;
+  }
+  .selected-movie {
+    flex-direction: column;
+  }
+  .selected-movie img {
+    width: 100%;
+    height: 470px;
+  }
+  .watched-movies h2 {
+    font-size: 0.8rem;
+  }
+  .watched-movie-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+  .remove-from-list {
+    padding: 0.5rem;
+    font-size: 0.6rem;
+    top: 0.5rem;
+  }
+  .selected-movie-title {
+    font-size: 0.8rem;
+  }
+  .selected-movie-plot {
+    font-size: 0.6rem;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .selected-movie-about {
+    padding-bottom: 0;
+  }
+  .selected-movie-director,
+  .selected-movie-actors,
+  .selected-movie-awards,
+  .watched-movie-title {
+    font-size: 0.7rem;
+  }
+  .add-to-list {
+    padding: 0.6rem;
+    font-size: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .watched-movies-btn {
+    margin-top: -1.4rem;
+    padding: 0.5rem;
+    font-size: 0.5rem;
+  }
+  .back-btn {
+    writing-mode: horizontal-tb;
+    transform: rotate(0deg);
+    vertical-align: middle;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.7rem;
+  }
 }

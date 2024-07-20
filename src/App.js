@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { useLocalStorageState } from "./hooks/useLocalStroage";
+import { useMovies } from "./hooks/useMovies";
+import { Navbar } from "./components/Navbar";
+import { SearchQuery } from "./components/SearchQuery";
+import { MovieBox } from "./components/MovieBox";
+import { SelectedMovie } from "./components/SelectedMovie";
+import { WatchedMovies } from "./components/WatchedMovies";
 
-function App() {
+export default function App() {
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  //Custom hook
+  const [watchedMovies, setWatchedMovies] = useLocalStorageState([], "watched");
+  const { movies, setQuery, query } = useMovies();
+
+  function handleQueryChange(e) {
+    setQuery(e.target.value);
+  }
+
+  function handleSelectedMovie(movieID) {
+    setSelectedMovie(movieID);
+  }
+  function handleWatchedMovies(movie) {
+    setWatchedMovies([...watchedMovies, movie]);
+    setSelectedMovie(null);
+  }
+  function handleRemoveWatchedMovie(movieID) {
+    setWatchedMovies((prevWatchedMovies) =>
+      watchedMovies.filter((movie) => movie.imdbID !== movieID)
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <Navbar>
+        <SearchQuery query={query} handleQueryChange={handleQueryChange} />
+      </Navbar>
+      <div className="container">
+        {watchedMovies.length > 0 && (
+          <WatchedMovies
+            watchedMovies={watchedMovies}
+            handleRemoveWatchedMovie={handleRemoveWatchedMovie}
+          />
+        )}
+        {selectedMovie ? (
+          <SelectedMovie
+            selectedID={selectedMovie}
+            handleSelectedMovie={handleSelectedMovie}
+            handleWatchedMovies={handleWatchedMovies}
+            watchedMovies={watchedMovies}
+          />
+        ) : (
+          <MovieBox movies={movies} handleSelectedMovie={handleSelectedMovie} />
+        )}
+      </div>
+    </main>
   );
 }
-
-export default App;
