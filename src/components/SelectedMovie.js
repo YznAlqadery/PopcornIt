@@ -24,6 +24,7 @@ export function SelectedMovie({
       fetchSelectedMovie();
       setIsLoading(false);
     },
+
     [selectedID]
   );
 

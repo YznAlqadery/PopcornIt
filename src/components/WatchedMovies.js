@@ -6,7 +6,7 @@ export function WatchedMovies({ watchedMovies, handleRemoveWatchedMovie }) {
 
   const className = "watched-movie";
   return (
-    <div className="watched-movies">
+    <div className="watched-movies" style={isOpened ? { height: "60vh" } : {}}>
       <h2>Watched Movies ({watchedMovies.length})</h2>
       <button
         className="watched-movies-btn"

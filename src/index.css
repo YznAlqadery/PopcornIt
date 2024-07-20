@@ -172,11 +172,9 @@ span {
   font-family: inherit;
   font-weight: bold;
   font-size: 1rem;
-  margin-top: 2rem;
-  transition: background-color 0.8s;
   text-align: center;
   display: block;
-  margin-top: -2rem;
+  margin-top: -1.9rem;
 }
 .watched-movies-btn span {
   display: block;
@@ -185,11 +183,6 @@ span {
   padding: 0rem;
   margin: 0 auto;
 }
-
-.watched-movies-btn:hover {
-  background-color: #fcbf49;
-}
-
 .hidden {
   display: none;
 }
@@ -233,12 +226,8 @@ span {
   font-weight: bold;
   font-size: 1rem;
   margin-top: 1rem;
-  transition: background-color 0.3s;
   top: 1rem;
   right: 1rem;
-}
-.remove-from-list:hover {
-  background-color: #fcbf49;
 }
 
 /* Media Queries*/
@@ -411,7 +400,7 @@ span {
   }
   .movie-year,
   .watched-movie-year {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
   .movie,
   .watched-movie {
